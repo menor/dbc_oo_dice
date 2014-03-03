@@ -17,9 +17,11 @@ function View(dice){
   $('.dice').append('<div class="die">'+ dice.value +'</div>');
   };
 
-  this.updateDie = function(die) {
-    $(die).text(die.value);
+  this.updateDie = function(die, new_value) {
+    debugger;
+    $('.die').html(new_value);
   }
+
 }
 
 // Controller
@@ -36,7 +38,7 @@ function Controller(){
 
   $('#roller button.roll').on('click', function() {
     $.each(that.dice, function(index, die){
-      that.view.updateDie(die.roll());
+      that.view.updateDie(die, die.roll());
     });
   });
     // $('.die').each(index, die){
