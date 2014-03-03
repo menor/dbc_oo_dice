@@ -3,7 +3,8 @@ $(document).ready(function() {
 });
 
 // Model
-function Die() {
+function Die(id) {
+  this.id = id
   this.value = 0;
 
   this.roll = function(){
@@ -18,8 +19,7 @@ function View(dice){
   };
 
   this.updateDie = function(die, new_value) {
-    debugger;
-    $('.die').html(new_value);
+    $(die).html(new_value);
   }
 
 }
@@ -30,16 +30,16 @@ function Controller(){
   this.view = new View;
   var that = this;
   $('#roller button.add').on('click', function() {
-    new_die = new Die();
+    new_die = new Die(that.dice.length);
     that.dice.push(new_die);
     // new_view = new View(new_die);
     that.view.displayDie(new_die);
   });
 
   $('#roller button.roll').on('click', function() {
-    $.each(that.dice, function(index, die){
+    $('.die').each(function(k, die) {
       that.view.updateDie(die, die.roll());
-    });
+    })
   });
     // $('.die').each(index, die){
     //   die.roll
@@ -47,7 +47,7 @@ function Controller(){
     // new_view = new View(new_die);
     // new_view.displayDie(new_die);
   // });
-}
+};
 
  // $('#roller button.add').on('click', function() {
  //    console.log("WAT")
